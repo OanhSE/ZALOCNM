@@ -1,0 +1,39 @@
+<form [formGroup]="form">
+  <div class="form-group">
+
+    <label>Số điện thoại:</label>
+    <input
+      formControlName="oldPhone"
+      id="oldPhone"
+      type="tel"
+      class="form-control" [ngClass]="{ 'is-invalid': submitted && f.oldPhone.errors }"/>
+
+      <div *ngIf="f.oldPhone.errors.required" class="invalid-feedback">Số điện thoại cũ là bắt buộc.</div>
+
+  </div>
+
+  <div class="form-group">
+    <label>Số điện thoại mới:</label>
+    <input
+      formControlName="newPhone"
+      id="newPhone"
+      type="tel"
+      class="form-control" [ngClass]="{ 'is-invalid': submitted && f.newPhone.errors }"/>
+
+      <div *ngIf="f.newPhone.errors.required" class="invalid-feedback">Số điện thoại mới là bắt buộc </div>
+
+
+  </div>
+
+
+
+  <div class="form-group">
+
+    <div class=" col-xs-3">
+      <button type="button" class="btn btn-danger"  >Hủy<i class="fa "></i></button>
+      <button type="submit" class="btn btn-success"  >Cập nhật<i class="fa"></i></button>
+    </div>
+
+  </div>
+
+</form>
