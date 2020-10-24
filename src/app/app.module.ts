@@ -1,6 +1,6 @@
 ﻿import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { ReactiveFormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 // used to create fake backend
@@ -12,25 +12,21 @@ import { AppComponent } from './app.component';
 import { AlertComponent } from './_components';
 import { HomeComponent } from './home';
 import { EditPassComponent } from './edit-pass/edit-pass.component';
-import { EditPhoneComponent } from './edit-phone/edit-phone.component'
-;
-import { UpdateInformationComponent } from './update-information/update-information.component'
-;
-import { DeleteAccountComponent } from './delete-account/delete-account.component'
-;
-import { TransferAccountComponent } from './transfer-account/transfer-account.component'
-;
-import { MessagerComponent } from './messager/messager.component'
-;
-import { DirectoryComponent } from './directory/directory.component'
-;
+// tslint:disable-next-line:import-spacing
+import { EditPhoneComponent } from './edit-phone/edit-phone.component';
+import { UpdateInformationComponent } from './update-information/update-information.component';
+import { DeleteAccountComponent } from './delete-account/delete-account.component';
+import { TransferAccountComponent } from './transfer-account/transfer-account.component';
+import { MessagerComponent } from './messager/messager.component';
+import { DirectoryComponent } from './directory/directory.component';
 @NgModule({
-    imports: [
-        BrowserModule,
-        ReactiveFormsModule,
-        HttpClientModule,
-        AppRoutingModule
-    ],
+  imports: [
+    BrowserModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    AppRoutingModule,
+    FormsModule
+  ],
     declarations: [
         AppComponent,
         AlertComponent,
@@ -51,4 +47,4 @@ import { DirectoryComponent } from './directory/directory.component'
     ],
     bootstrap: [AppComponent]
 })
-export class AppModule { };
+export class AppModule { }

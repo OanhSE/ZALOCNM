@@ -16,4 +16,8 @@ export class AppComponent {
     logout() {
         this.accountService.logout();
     }
+  // tslint:disable-next-line:typedef
+  public getUser(){
+    return this.user;
+  }
 }

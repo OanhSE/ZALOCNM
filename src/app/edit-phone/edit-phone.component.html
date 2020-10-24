@@ -1,5 +1,34 @@
-<form [formGroup]="form">
-  <div class="form-group">
+<form >
+
+  <div >
+    <input type="text" [(ngModel)] ="user.firstName" name="first" class="form-control" style="display: none;"/>
+  </div>
+  <div >
+    <input type="text" [(ngModel)]="user.lastName" name="last" class="form-control" style="display: none;"/>
+  </div>
+  <div >
+    <input type="date" [(ngModel)]="user.birthday" name="birth" class="form-control" style="display: none;"/>
+  </div>
+  <!--<div >
+    <div class="form-check-inline">
+      <label class="form-check-label">
+        <input type="radio" class="form-check-input" formControlName="sex" id="male" style="display: none">
+      </label>
+    </div>
+    <div class="form-check-inline">
+      <label class="form-check-label">
+        <input type="radio" class="form-check-input" formControlName="sex" id="female" style="display: none">
+      </label>
+    </div>
+  </div>-->
+  <div >
+    <input type="text" [(ngModel)]="user.username" class="form-control" name="username" style="display: none"/>
+  </div>
+  <div >
+    <input type="password" [(ngModel)]="user.password" name="pwd" class="form-control" style="display: none"/>
+  </div>
+
+  <!--<div >
 
     <label>Số điện thoại:</label>
     <input
@@ -10,28 +39,24 @@
 
       <div *ngIf="f.oldPhone.errors.required" class="invalid-feedback">Số điện thoại cũ là bắt buộc.</div>
 
-  </div>
+  </div>-->
 
-  <div class="form-group">
+  <div >
     <label>Số điện thoại mới:</label>
     <input
-      formControlName="newPhone"
-      id="newPhone"
-      type="tel"
-      class="form-control" [ngClass]="{ 'is-invalid': submitted && f.newPhone.errors }"/>
+      [(ngModel)]="user.phone" name="phone"
+      id="phone"
+      type="tel"/>
 
-      <div *ngIf="f.newPhone.errors.required" class="invalid-feedback">Số điện thoại mới là bắt buộc </div>
-
-
+    <div class="invalid-feedback">Số điện thoại mới là bắt buộc</div>
   </div>
 
 
-
-  <div class="form-group">
+  <div >
 
     <div class=" col-xs-3">
-      <button type="button" class="btn btn-danger"  >Hủy<i class="fa "></i></button>
-      <button type="submit" class="btn btn-success"  >Cập nhật<i class="fa"></i></button>
+<!--      <button type="button" (click)="editPhone()" class="btn btn-danger">Hủy<i class="fa "></i></button>-->
+      <button type="submit" class="btn btn-success" (click)="editPhone()">Cập nhật<i class="fa"></i></button>
     </div>
 
   </div>
