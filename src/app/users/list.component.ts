@@ -9,12 +9,14 @@ export class ListComponent implements OnInit {
 
     constructor(private accountService: AccountService) {}
 
+  // tslint:disable-next-line:typedef
     ngOnInit() {
         this.accountService.getAll()
             .pipe(first())
             .subscribe(users => this.users = users);
     }
 
+  // tslint:disable-next-line:typedef
     deleteUser(id: string) {
         const user = this.users.find(x => x.id === id);
         user.isDeleting = true;

@@ -3,6 +3,7 @@
 import { AccountService } from './_services';
 import { User } from './_models';
 
+// tslint:disable-next-line:component-selector
 @Component({ selector: 'app', templateUrl: 'app.component.html' })
 export class AppComponent {
     user: User;
@@ -11,6 +12,7 @@ export class AppComponent {
         this.accountService.user.subscribe(x => this.user = x);
     }
 
+  // tslint:disable-next-line:typedef
     logout() {
         this.accountService.logout();
     }

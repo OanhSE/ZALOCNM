@@ -21,8 +21,9 @@ export class AddEditComponent implements OnInit {
         private alertService: AlertService
     ) {}
 
+  // tslint:disable-next-line:typedef
     ngOnInit() {
-        this.id = this.route.snapshot.params['id'];
+        this.id = this.route.snapshot.params.id;
         this.isAddMode = !this.id;
 
         // password not required in edit mode
@@ -35,6 +36,7 @@ export class AddEditComponent implements OnInit {
                        firstName: ['', Validators.required],
                        lastName: ['', Validators.required],
                        phone: ['', Validators.required],
+                        sex: ['', Validators.required],
                        birthday: ['', Validators.required],
                        username: ['', Validators.required],
                        password: ['', passwordValidators]
@@ -48,8 +50,10 @@ export class AddEditComponent implements OnInit {
     }
 
     // convenience getter for easy access to form fields
+  // tslint:disable-next-line:typedef
     get f() { return this.form.controls; }
 
+  // tslint:disable-next-line:typedef
     onSubmit() {
         this.submitted = true;
 
@@ -69,6 +73,7 @@ export class AddEditComponent implements OnInit {
         }
     }
 
+  // tslint:disable-next-line:typedef
     private createUser() {
         this.accountService.register(this.form.value)
             .pipe(first())
@@ -84,6 +89,7 @@ export class AddEditComponent implements OnInit {
             });
     }
 
+  // tslint:disable-next-line:typedef
     private updateUser() {
         this.accountService.update(this.id, this.form.value)
             .pipe(first())

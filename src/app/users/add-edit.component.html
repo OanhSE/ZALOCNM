@@ -31,14 +31,14 @@
   </div>
   <div class="form-group">
     <label for="sex">Giới tính:</label><br>
-    <div class="form-check-inline">
-      <label class="form-check-label">
-        <input type="radio" class="form-check-input" name="sex" id="male" checked>Nam
+    <div class="form-check-inline"  formControlName="sex" >
+      <label class="form-check-label" >
+        <input type="radio" formControlName="sex" class="form-check-input" name="sex" value="male" >Nam
       </label>
     </div>
     <div class="form-check-inline">
       <label class="form-check-label">
-        <input type="radio" class="form-check-input" name="sex" id ="female" >Nữ
+        <input type="radio"  formControlName="sex" class="form-check-input" name="sex" value="female" >Nữ
       </label>
     </div>
 

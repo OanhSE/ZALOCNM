@@ -9,106 +9,117 @@ import { User } from '@app/_models';
 
 @Injectable({ providedIn: 'root' })
 export class AccountService {
-    private userSubject: BehaviorSubject<User>;
-    public user: Observable<User>;
+  private userSubject: BehaviorSubject<User>;
+  public user: Observable<User>;
 
-    constructor(
-        private router: Router,
-        private httpClient: HttpClient
-    ) {
-       /* this.userSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('user')));
-        this.user = this.userSubject.asObservable();*/
-    }
-
-    /*public get userValue(): User {
-        return this.userSubject.value;
-    }*/
-
-    login(phone , password) {
-        return this.httpClient.post<User>(`${environment.apiUrl}/users/authenticate`, { phone, password })
-            .pipe(map(user => {
-                // store user details and jwt token in local storage to keep user logged in between page refreshes
-                localStorage.setItem('user', JSON.stringify(user));
-                this.userSubject.next(user);
-                return user;
-            }));
-    }
-
-
-    logout() {
-        // remove user from local storage and set current user to null
-        localStorage.removeItem('user');
-        this.userSubject.next(null);
-        this.router.navigate(['/account/login']);
-    }
-
-    /*register(user: User) {
-        return this.http.post(`${environment.apiUrl}/users/register`, user);
-    }
-
-    getAll() {
-        return this.http.get<User[]>(`${environment.apiUrl}/users`);
-    }
-
-    getById(id: string) {
-        return this.http.get<User>(`${environment.apiUrl}/users/${id}`);
-    }
-
-    update(id, params) {
-        return this.http.put(`${environment.apiUrl}/users/${id}`, params)
-            .pipe(map(x => {
-                // update stored user if the logged in user updated their own record
-                if (id == this.userValue.id) {
-                    // update local storage
-                    const user = { ...this.userValue, ...params };
-                    localStorage.setItem('user', JSON.stringify(user));
-
-                    // publish updated user to subscribers
-                    this.userSubject.next(user);
-                }
-                return x;
-            }));
-    }
-
-    delete(id: string) {
-        return this.http.delete(`${environment.apiUrl}/users/${id}`)
-            .pipe(map(x => {
-                // auto logout if the logged in user deleted their own record
-                if (id == this.userValue.id) {
-                    this.logout();
-                }
-                return x;
-            }));
-    }*/
-
-  private base_Url = "Newtech20Module1-env.eba-2mxedsfk.ap-southeast-1.elasticbeanstalk.com/"
-
-  public getAll(){
-    return this.httpClient.get(this.base_Url + "getUsers");
+  constructor(
+    private router: Router,
+    private http: HttpClient
+  ) {
+    this.userSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('user')));
+    this.user = this.userSubject.asObservable();
   }
 
-  public getUserById(id: string){
-    return this.httpClient.get(this.base_Url + "getUsers/" + id);
+  public get userValue(): User {
+    return this.userSubject.value;
   }
 
-  public createUser(user: User){
-    return this.httpClient.post(this.base_Url + "saveUser", user);
+  // tslint:disable-next-line:typedef
+  login(phone , password) {
+    return this.http.post<User>(`${environment.apiUrl}/users/authenticate`, { phone, password })
+      .pipe(map(user => {
+        // store user details and jwt token in local storage to keep user logged in between page refreshes
+        localStorage.setItem('user', JSON.stringify(user));
+        this.userSubject.next(user);
+        return user;
+      }));
   }
 
-  public update(user: User){
-    return this.httpClient.put(this.base_Url + "editUser", user);
+
+  // tslint:disable-next-line:typedef
+  logout() {
+    // remove user from local storage and set current user to null
+    localStorage.removeItem('user');
+    this.userSubject.next(null);
+    this.router.navigate(['/account/login']);
   }
 
-  public delete(user: User){
-    return this.httpClient.delete(this.base_Url + "deleteUser");
+  // tslint:disable-next-line:typedef
+  register(user: User) {
+    return this.http.post(`${environment.apiUrl}/users/register`, user);
   }
 
-  public getUserByPhone(phone: string){
-    return this.httpClient.get(this.base_Url + "getUser/phone?phone=" + phone);
+  // tslint:disable-next-line:typedef
+  getAll() {
+    return this.http.get<User[]>(`${environment.apiUrl}/users`);
   }
 
-  public getUserByName(name: string){
-    return this.httpClient.get(this.base_Url + "getUser/name?name=" + name);
+  // tslint:disable-next-line:typedef
+  getById(id: string) {
+    return this.http.get<User>(`${environment.apiUrl}/users/${id}`);
   }
 
+  // tslint:disable-next-line:typedef
+  update(id, params) {
+    return this.http.put(`${environment.apiUrl}/users/${id}`, params)
+      .pipe(map(x => {
+        // update stored user if the logged in user updated their own record
+        // tslint:disable-next-line:triple-equals
+        if (id == this.userValue.id) {
+          // update local storage
+          const user = { ...this.userValue, ...params };
+          localStorage.setItem('user', JSON.stringify(user));
+
+          // publish updated user to subscribers
+          this.userSubject.next(user);
+        }
+        return x;
+      }));
+  }
+
+  // tslint:disable-next-line:typedef
+  delete(id: string) {
+    return this.http.delete(`${environment.apiUrl}/users/${id}`)
+      .pipe(map(x => {
+        // auto logout if the logged in user deleted their own record
+        // tslint:disable-next-line:triple-equals
+        if (id == this.userValue.id) {
+          this.logout();
+        }
+        return x;
+      }));
+  }
 }
+
+
+// private base_Url = "Newtech20Module1-env.eba-2mxedsfk.ap-southeast-1.elasticbeanstalk.com/"
+  //
+  // public getAll(){
+  //   return this.httpClient.get(this.base_Url + "getUsers");
+  // }
+  //
+  // public getUserById(id: string){
+  //   return this.httpClient.get(this.base_Url + "getUsers/" + id);
+  // }
+  //
+  // public createUser(user: User){
+  //   return this.httpClient.post(this.base_Url + "saveUser", user);
+  // }
+  //
+  // public update(user: User){
+  //   return this.httpClient.put(this.base_Url + "editUser", user);
+  // }
+  //
+  // public delete(user: User){
+  //   return this.httpClient.delete(this.base_Url + "deleteUser");
+  // }
+  //
+  // public getUserByPhone(phone: string){
+  //   return this.httpClient.get(this.base_Url + "getUser/phone?phone=" + phone);
+  // }
+  //
+  // public getUserByName(name: string){
+  //   return this.httpClient.get(this.base_Url + "getUser/name?name=" + name);
+  // }
+
+
