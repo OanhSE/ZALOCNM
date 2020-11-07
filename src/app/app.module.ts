@@ -19,6 +19,7 @@ import { DeleteAccountComponent } from './delete-account/delete-account.componen
 import { TransferAccountComponent } from './transfer-account/transfer-account.component';
 import { MessagerComponent } from './messager/messager.component';
 import { DirectoryComponent } from './directory/directory.component';
+
 @NgModule({
   imports: [
     BrowserModule,
