@@ -1,16 +1,15 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HomeuserComponent } from './homeuser.component';
+import { MessComponent } from './mess/mess.component';
 import { PersonalPageComponent } from './personal-page/personal-page.component';
 import { DirectoryComponent } from './directory/directory.component';
 
 
 
 @NgModule({
-  declarations: [HomeuserComponent, PersonalPageComponent, DirectoryComponent],
+  declarations: [MessComponent, PersonalPageComponent, DirectoryComponent],
   imports: [
-    CommonModule,
-    PersonalPageComponent
+    CommonModule
   ]
 })
-export class HomeuserModule { }
+export class HomeUserModule { }
