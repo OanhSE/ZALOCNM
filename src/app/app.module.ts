@@ -18,7 +18,10 @@ import { UpdateInformationComponent } from './update-information/update-informat
 import { DeleteAccountComponent } from './delete-account/delete-account.component';
 import { TransferAccountComponent } from './transfer-account/transfer-account.component';
 import { MessagerComponent } from './messager/messager.component';
-import { DirectoryComponent } from './directory/directory.component';
+import { DirectoryComponent } from './directory/directory.component';;
+import { HomeUserComponent } from './home-user/home-user.component'
+
+
 
 @NgModule({
   imports: [
@@ -38,7 +41,10 @@ import { DirectoryComponent } from './directory/directory.component';
         DirectoryComponent,
         MessagerComponent,
         TransferAccountComponent,
-        DeleteAccountComponent],
+        DeleteAccountComponent,,
+        HomeUserComponent
+
+        ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },

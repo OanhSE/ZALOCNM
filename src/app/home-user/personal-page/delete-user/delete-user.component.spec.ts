@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { HomeuserComponent } from './homeuser.component';
+import { DeleteUserComponent } from './delete-user.component';
 
-describe('HomeuserComponent', () => {
-  let component: HomeuserComponent;
-  let fixture: ComponentFixture<HomeuserComponent>;
+describe('DeleteUserComponent', () => {
+  let component: DeleteUserComponent;
+  let fixture: ComponentFixture<DeleteUserComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ HomeuserComponent ]
+      declarations: [ DeleteUserComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(HomeuserComponent);
+    fixture = TestBed.createComponent(DeleteUserComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
