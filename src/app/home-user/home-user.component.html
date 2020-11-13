@@ -1,1 +1,61 @@
-<p>home-user works!</p>
+<div class="container-fluid" >
+  <div class="row">
+    <div class="col-md-1" style="background-color: #C8E1C2; height:700px">
+      <nav class="navbar">
+        <!-- Brand/logo -->
+
+        <ul class="nav flex-column">
+          <li>
+            <a class="navbar-brand" routerLink="/person" routerLinkActive="active" >
+              <img src="assets/images/user.png" alt="logo" style="width:40px;">
+
+            </a>
+
+          </li>
+          <li>
+            <a class="navbar-brand" routerLink="/person" routerLinkActive="active" >
+              {{user.firstName}}
+
+            </a>
+
+          </li>
+          <li>
+            <a class="navbar-brand" routerLink="/mess" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+              <img src="assets/images/chat.png" alt="logo" style="width:40px;">
+            </a>
+
+          </li>
+          <li>
+            <a class="navbar-brand" routerLink="/directory" routerLinkActive="active" >
+              <img src="assets/images/directory.png" alt="logo" style="width:40px;">
+            </a>
+
+          </li>
+          <li>
+            <a class="navbar-brand" routerLink="/" routerLinkActive="active" >
+              <img src="assets/images/shield.png" alt="logo" style="width:40px;">
+            </a>
+
+          </li>
+          <li>
+            <a class="navbar-brand" href="#">
+              <img src="assets/images/mon.png" alt="logo" style="width:40px;">
+            </a>
+
+          </li>
+        </ul>
+
+      </nav>
+
+    </div>
+    <div class="col-md-11" style="background-color: darkgray;">
+      <div class="app-container-fluid">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+
+
+  </div>
+
+</div>
+

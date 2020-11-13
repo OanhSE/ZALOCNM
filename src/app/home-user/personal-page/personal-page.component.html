@@ -1,1 +1,116 @@
-<p>personal-page works!</p>
+
+<!--&lt;!&ndash; nav &ndash;&gt;-->
+<!--<nav class="navbar navbar-expand navbar-dark bg-dark" *ngIf="user">-->
+<!--    <div class="navbar-nav">-->
+<!--        <a class="nav-item nav-link" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Trang chủ</a>-->
+<!--        <a class="nav-item nav-link" routerLink="/users" routerLinkActive="active">Người dùng</a>-->
+<!--        <a class="nav-item nav-link" (click)="logout()">Đăng xuất</a>-->
+<!--        <a class="nav-item nav-link" routerLink="/editpass" routerLinkActive="active">Thay đổi mk</a>-->
+
+
+<!--    </div>-->
+<!--</nav>-->
+
+<!--&lt;!&ndash; main app container &ndash;&gt;-->
+<!--<div class="app-container" [ngClass]="{ 'bg-light': user }">-->
+<!--    <alert></alert>-->
+<!--    <router-outlet></router-outlet>-->
+<!--</div>-->
+
+<!--&lt;!&ndash; credits &ndash;&gt;-->
+<!--<div class="text-center mt-4">-->
+<!--    <p>-->
+<!--        <a href="#" target="_top">zalovn</a>-->
+<!--    </p>-->
+
+<!--</div>&ndash;&gt;-->
+
+<!--Code Quỳnh-->
+
+
+<div>
+
+  <img src="assets/images/Logo.png" width="100%" height="100px">
+<!--  &lt;!&ndash;nav&ndash;&gt;-->
+<!--<nav class="navbar navbar-expand"  >-->
+<!--  <div  style = "background-color: #C8E1C2; width:100%;height: 100px;">-->
+<!--    <div class="row">-->
+<!--      <div class="col-md-12">-->
+
+
+<!--          &lt;!&ndash; Links &ndash;&gt;-->
+<!--          <ul class="navbar-nav">-->
+<!--              <a class="nav-item nav-link" style = "color: black;  font-size: 120%;" routerLink="/users" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Trang chủ</a>-->
+<!--              <a class="nav-item nav-link" style = "color: black;font-size: 120%;" routerLink="/mess" routerLinkActive="active">Tin nhắn</a>-->
+<!--              <a class="nav-item nav-link" style = "color: black; font-size: 120%;" routerLink="/directory" routerLinkActive="active">Danh bạ</a>-->
+
+
+<!--            <li class="nav-item  "style = "float:right; ">-->
+<!--              <a class="nav-link" style = "color: black; width:100%; font-size: 120%;" routerLink="/" routerLinkActive="active"> {{user.username}}</a>-->
+<!--            </li>-->
+
+
+
+<!--          </ul>-->
+
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</nav>-->
+<!--&lt;!&ndash;nav&ndash;&gt;-->
+<div class ="row"  >
+    <div class="col-sm-4" style="height: 600px">
+        <div class="text-center" style = "border: 2px solid; border-bottom-color: black;" >
+          <br/>
+          <div  style = "background-color: #C8E1C2; width: 100%;height: 50px ; ">
+            <a routerLink="/person/edit-phone-user" style = "color: black; width:100%; font-size: 120%;"routerLinkActive="active" >Đổi số điện thoại</a>
+          </div>
+          <br/>
+
+          <div  style = "background-color: #C8E1C2; width: 100%;height: 50px ; ">
+            <a style = "color: black; width:100%; font-size: 120%;" routerLink="/person/edit-pass-user" routerLinkActive="active">Thay đổi mật khẩu</a>
+          </div>
+          <br/>
+
+          <div  style = "background-color: #C8E1C2; width: 100%;height: 50px ; ">
+            <a routerLink="/person/update-information-user" style = "color: black; width:100%; font-size: 120%;"routerLinkActive="active" >Cập nhật thông tin</a>
+          </div>
+          <br/>
+
+          <div  style = "background-color: #C8E1C2; width: 100%;height: 50px ; ">
+            <a routerLink="/person/delete-user" style = "color: black; width:100%; font-size: 120%;"routerLinkActive="active" >Xóa tài khoản</a>
+          </div>
+          <br/>
+
+          <div  style = "background-color: #C8E1C2; width: 100%;height: 50px ; ">
+            <a routerLink="/person/tranfer-user"style = "color: black; width:100%; font-size: 120%;" routerLinkActive="active" >Chuyển tài khoản</a>
+          </div>
+          <br/>
+
+          <div  style = "background-color: #C8E1C2; width: 100%;height: 50px ; ">
+            <a href="#" style = "color: black; font-size: 120%;" (click)="logout()">Đăng xuất</a>
+          </div>
+          <br/>
+
+        </div>
+    </div>
+    <div class="col-sm-8" style="height: 300px">
+      <!-- main app container -->
+<!--         <div class="app-container" [ngClass]="{ 'bg-light': user }">-->
+          <div class="app-container">
+              <router-outlet></router-outlet>
+
+           </div>
+
+      <!-- credits -->
+
+     <!-- <p>Chuyển tài khoản</p>
+
+      <button type="button" class="btn btn-default btn-circle" ><i class="glyphicon glyphicon-plus-sign"></i> Thêm tài khoản
+      </button>-->
+    </div>
+
+</div>
+</div>
+<!--Code Quỳnh-->
+

@@ -19,6 +19,7 @@ export class RegisterComponent implements OnInit {
         private alertService: AlertService
     ) { }
 
+  // tslint:disable-next-line:typedef
     ngOnInit() {
         this.form = this.formBuilder.group({
             firstName: ['', Validators.required],
@@ -32,8 +33,10 @@ export class RegisterComponent implements OnInit {
     }
 
     // convenience getter for easy access to form fields
+  // tslint:disable-next-line:typedef
     get f() { return this.form.controls; }
 
+  // tslint:disable-next-line:typedef
     onSubmit() {
         this.submitted = true;
 

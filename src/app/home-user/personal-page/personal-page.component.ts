@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {User} from '@app/_models';
+import {AccountService} from '@app/_services';
 
 @Component({
   selector: 'app-personal-page',
@@ -7,7 +9,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PersonalPageComponent implements OnInit {
 
-  constructor() { }
+  user: User;
+
+  constructor(private accountService: AccountService) {
+    this.accountService.user.subscribe(x => this.user = x);
+  }
+
+  // tslint:disable-next-line:typedef
+  logout() {
+    this.accountService.logout();
+  }
+  // tslint:disable-next-line:typedef
+  public getUser(){
+    return this.user;
+  }
 
   ngOnInit(): void {
   }

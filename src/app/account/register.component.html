@@ -3,35 +3,35 @@
     <div class="card-body">
         <form [formGroup]="form" (ngSubmit)="onSubmit()">
             <div class="form-group">
-                <label for="firstName">Họ:</label>
+                <label >Họ:</label>
                 <input type="text" formControlName="firstName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }" />
                 <div *ngIf="submitted && f.firstName.errors" class="invalid-feedback">
                     <div *ngIf="f.firstName.errors.required">Họ là bắt buộc</div>
                 </div>
             </div>
             <div class="form-group">
-                <label for="lastName">Tên:</label>
+                <label >Tên:</label>
                 <input type="text" formControlName="lastName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }" />
                 <div *ngIf="submitted && f.lastName.errors" class="invalid-feedback">
                     <div *ngIf="f.lastName.errors.required">Tên là bắt buộc</div>
                 </div>
             </div>
           <div class="form-group">
-            <label for="phone">Số điện thoại:</label>
+            <label >Số điện thoại:</label>
             <input type="tel" formControlName="phone" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.phone.errors }" />
             <div *ngIf="submitted && f.phone.errors" class="invalid-feedback">
               <div *ngIf="f.phone.errors.required">Số điện thoại là bắt buộc</div>
             </div>
           </div>
           <div class="form-group">
-            <label for="birthday">Ngày sinh:</label>
+            <label >Ngày sinh:</label>
             <input type="date" formControlName="birthday" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.birthday.errors }" />
             <div *ngIf="submitted && f.birthday.errors" class="invalid-feedback">
               <div *ngIf="f.birthday.errors.required"> Ngày sinh là bắt buộc</div>
             </div>
           </div>
           <div class="form-group">
-            <label for="sex">Giới tính:</label><br>
+            <label >Giới tính:</label><br>
             <div class="form-check-inline" formControlName="sex">
               <label class="form-check-label">
                 <input type="radio"formControlName="sex" class="form-check-input" name="sex" id="male" value="male" checked>Nam
@@ -45,14 +45,14 @@
 
           </div>
             <div class="form-group">
-                <label for="username">Tên người dùng:</label>
+                <label >Tên người dùng:</label>
                 <input type="text" formControlName="username" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
                 <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
                     <div *ngIf="f.username.errors.required">Tên người dùng là bắt buộc</div>
                 </div>
             </div>
             <div class="form-group">
-                <label for="password">Mật khẩu:</label>
+                <label >Mật khẩu:</label>
                 <input type="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
                 <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
                     <div *ngIf="f.password.errors.required">Mật khẩu là bắt buộc</div>

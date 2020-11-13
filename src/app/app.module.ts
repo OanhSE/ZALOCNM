@@ -10,16 +10,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { JwtInterceptor, ErrorInterceptor } from './_helpers';
 import { AppComponent } from './app.component';
 import { AlertComponent } from './_components';
-import { HomeComponent } from './home';
-import { EditPassComponent } from './edit-pass/edit-pass.component';
-// tslint:disable-next-line:import-spacing
-import { EditPhoneComponent } from './edit-phone/edit-phone.component';
-import { UpdateInformationComponent } from './update-information/update-information.component';
-import { DeleteAccountComponent } from './delete-account/delete-account.component';
-import { TransferAccountComponent } from './transfer-account/transfer-account.component';
-import { MessagerComponent } from './messager/messager.component';
-import { DirectoryComponent } from './directory/directory.component';;
-import { HomeUserComponent } from './home-user/home-user.component'
+import {HomeUserModule} from '@app/home-user/home-user.module';
+
+
 
 
 
@@ -29,20 +22,15 @@ import { HomeUserComponent } from './home-user/home-user.component'
     ReactiveFormsModule,
     HttpClientModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    HomeUserModule
+
+
   ],
     declarations: [
         AppComponent,
-        AlertComponent,
-        HomeComponent ,
-        EditPassComponent ,
-        EditPhoneComponent ,
-        UpdateInformationComponent,
-        DirectoryComponent,
-        MessagerComponent,
-        TransferAccountComponent,
-        DeleteAccountComponent,,
-        HomeUserComponent
+        AlertComponent
+
 
         ],
     providers: [
