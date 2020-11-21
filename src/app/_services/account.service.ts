@@ -11,6 +11,7 @@ import { User } from '@app/_models';
 export class AccountService {
   private userSubject: BehaviorSubject<User>;
   public user: Observable<User>;
+ // public url = '/';
 
   constructor(
     private router: Router,
@@ -52,6 +53,7 @@ export class AccountService {
   // tslint:disable-next-line:typedef
   getAll() {
     return this.http.get<User[]>(`${environment.apiUrl}/users`);
+   // return this.http.get<User[]>(this.url + 'getUsers');
   }
 
   // tslint:disable-next-line:typedef

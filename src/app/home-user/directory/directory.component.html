@@ -1,1 +1,44 @@
-<p>directory works!</p>
+
+  <div class="row">
+    <div class="col-sm-4" style="background-color: darkgray; height:100%">
+      <input  type="text" placeholder="Tìm kiếm bạn bè, nhóm " id="search" class="form-control inp-cus ">
+      <div class="row contact-list__add nav-button_add_friend">
+        <img class="contact-list__add__icon" src="assets/images/plus.png" alt="logo" >
+        <span class="fr-conv-item-title truncate" style="width: calc(100% - 60px); color: darkgreen">Thêm bạn bè bằng số điện thoại</span>
+      </div>
+      <div class="row contact-list-item">
+        <img class="fr-conv-item-avatar" src="assets/images/add-user.png" alt="logo" >
+        <span class="fr-conv-item-title truncate" >Danh sách kết bạn </span>
+      </div>
+      <div class="row contact-list-item">
+        <img class="fr-conv-item-avatar" src="assets/images/listgroup.png" alt="logo">
+        <span class="fr-conv-item-title truncate">Danh sách nhóm</span>
+      </div>
+      <div>
+        <div class="data-list__label">
+          <p>Bạn bè</p>
+        </div>
+        <div class="scroll-directory" >
+          <div *ngFor="let user of users">
+
+            <div class="row contact-list-item">
+              <a routerLink="directory-chat/{{user.id}}">
+              <img class="fr-conv-item-avatar" src="assets/images/listgroup.png" alt="logo">
+              <span class="fr-conv-item-title truncate">{{user.username}}</span>
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+
+
+    <div class="col-sm-8" style="background-color: white; height: 100%">
+      <router-outlet></router-outlet>
+
+    </div>
+
+  </div>
+
