@@ -12,7 +12,7 @@ export class AccountService {
   private userSubject: BehaviorSubject<User>;
   public user: Observable<User>;
   public uservalue: User ;
-  public url = '';
+  public url = 'http://Module120-env.eba-fda32ymv.ap-southeast-1.elasticbeanstalk.com/';
 
   constructor(
     private router: Router,
@@ -54,6 +54,13 @@ export class AccountService {
     localStorage.removeItem('user');
     this.userSubject.next(null);
     this.router.navigate(['/account/login']);
+  }
+  // tslint:disable-next-line:typedef
+  tranferAccount() {
+    // remove user from local storage and set current user to null
+    localStorage.removeItem('user');
+    this.userSubject.next(null);
+    this.router.navigate(['/account/register']);
   }
 
   // tslint:disable-next-line:typedef
@@ -99,12 +106,12 @@ export class AccountService {
   }
 
   // tslint:disable-next-line:typedef
-  delete(id: string) {
-    return this.http.delete(`${environment.apiUrl}/users/${id}`)
+  delete(user: User) {
+    return this.http.delete(this.url  + `deleteUser`)
       .pipe(map(x => {
         // auto logout if the logged in user deleted their own record
         // tslint:disable-next-line:triple-equals
-        if (id == this.userValue.id) {
+        if (user.id == this.userValue.id) {
           this.logout();
         }
         return x;

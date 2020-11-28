@@ -82,7 +82,9 @@
               <div class="phone-user">
                 {{u.phone}}
               </div>
-             <button class="button-user-addfriend" (click)= "saveContact(user.id,u.id)">Kết bạn</button>
+              <button *ngIf="checkAddFriend(user.id,u.id)" class="button-user-addfriend" (click)= "saveContact(user.id,u.id)">Kết bạn</button>
+              <button *ngIf="!checkAddFriend(user.id,u.id)" class="button-user-addfriend" >------</button>
+
             </div>
 
 
@@ -128,9 +130,12 @@
                 <button type="button" class="btn btn-primary">Nhắn tin</button>
               </div>
               <div class="col-6" align="center">
-                <button type="button" class="btn btn-outline-primary" (click)= "saveContact(user.id,u.id)">Kết bạn</button>
+                <button *ngIf="checkAddFriend(user.id,u.id)===0" class="button-user-addfriend" (click)= "saveContact(user.id,u.id)">Kết bạn</button>
+                <button *ngIf="checkAddFriend(user.id,u.id)===1" class="button-user-addfriend" >Hủy kết bạn</button>
+                <button *ngIf="checkAddFriend(user.id,u.id)===2" class="button-user-addfriend" (click)= "saveContact(user.id,u.id)">Chấp nhận</button>
+                <button *ngIf="checkAddFriend(user.id,u.id)===3" class="button-user-addfriend" >Bạn bè</button>
+
               </div>
-            </div>
             <div class="row" >
               <div class="col-4">
                 <span> Nhóm chung</span>

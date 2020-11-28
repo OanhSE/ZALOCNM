@@ -68,16 +68,10 @@ export class EditPassUserComponent implements OnInit {
             }
           });
       } else {
-        // tslint:disable-next-line:no-unused-expression
-        error => {
-          alert('xac thuc password khong trung khop');
-        };
+        this.alertService.error('xác thực mật khẩu không trùng khớp');
       }
     } else {
-      // tslint:disable-next-line:no-unused-expression
-      error => {
-        alert('password nhap vao khong hop le');
-      };
+      this.alertService.error('xác thực mật khẩu không hợp lệ');
     }
   }
 

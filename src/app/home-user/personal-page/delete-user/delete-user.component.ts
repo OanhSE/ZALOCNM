@@ -30,7 +30,7 @@ export class DeleteUserComponent implements OnInit {
 
     const user = this.users.find(x => x.id === id);
 
-    this.accountService.delete(id)
+    this.accountService.delete(user)
       .pipe(first())
       .subscribe(() => this.users = this.users.filter(x => x.id !== id));
   }

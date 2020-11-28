@@ -23,7 +23,7 @@ export class DirectoryComponent implements OnInit {
   userTagets: User[];
   usTarget: User;
   search;
-
+  check: number;
   constructor(
     private accountService: AccountService,
     private router: Router,
@@ -105,7 +105,11 @@ export class DirectoryComponent implements OnInit {
       });
    }
   // tslint:disable-next-line:typedef
-   addContactfromUser(u: User) {
-   }
+  checkAddFriend(id1: string , id2: string){
+        this.contactservice.checkRequestFriend(id1, id2).subscribe(x => {
+          this.check = x;
+        });
+        return this.check;
+  }
 
 }

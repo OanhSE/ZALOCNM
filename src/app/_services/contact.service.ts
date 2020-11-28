@@ -12,7 +12,7 @@ export class ContactService {
   private contactSubject: BehaviorSubject<Contact>;
   public contact: Observable<Contact>;
   public contactvalue: Contact ;
-  public url = '';
+  public url = 'http://Module120-env.eba-fda32ymv.ap-southeast-1.elasticbeanstalk.com/';
 
 
   constructor(
@@ -56,5 +56,8 @@ export class ContactService {
     // @ts-ignore
     return this.http.delete(this.url + `deleteContact`, contact ) ;
   }
-
+// tslint:disable-next-line:typedef
+  checkRequestFriend(id1: string, id2: string){
+    return this.http.get<number>(this.url + `checkFriend/${id1}/${id2}`);
+  }
 }

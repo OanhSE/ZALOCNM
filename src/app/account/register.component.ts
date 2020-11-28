@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 
 import { AccountService, AlertService } from '@app/_services';
+import validate = WebAssembly.validate;
 
 @Component({ templateUrl: 'register.component.html' })
 export class RegisterComponent implements OnInit {
