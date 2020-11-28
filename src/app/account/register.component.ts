@@ -23,9 +23,9 @@ export class RegisterComponent implements OnInit {
   // tslint:disable-next-line:typedef
     ngOnInit() {
         this.form = this.formBuilder.group({
-            firstName: ['', Validators.required],
+            firstName: ['', Validators.required, Validators.pattern('^[A-Za-z]+[A-Z a-z]')],
             lastName: ['', Validators.required],
-            phone: ['', [Validators.required, Validators.maxLength(10), Validators.minLength(10)]],
+            phone: ['', [Validators.required, Validators.maxLength(10), Validators.minLength(10), Validators.pattern('[0-9]{10}')]],
             birthday: ['', Validators.required],
             sex: ['', Validators.required],
             username: ['', Validators.required],

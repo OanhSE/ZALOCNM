@@ -5,6 +5,9 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {AccountService, AlertService} from '@app/_services';
 import {first} from 'rxjs/operators';
 import {BehaviorSubject} from 'rxjs';
+import {transformAll} from '@angular/compiler/src/render3/r3_ast';
+import {Formatter} from 'tslint/lib/formatters/pmdFormatter';
+import {DatePipe, formatDate} from '@angular/common';
 
 @Component({
   selector: 'app-update-information-user',
@@ -12,7 +15,7 @@ import {BehaviorSubject} from 'rxjs';
   styleUrls: ['./update-information-user.component.less']
 })
 export class UpdateInformationUserComponent implements OnInit {
-
+  date: Date;
   user: User;
   form: FormGroup;
   id: string;
@@ -25,7 +28,8 @@ export class UpdateInformationUserComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private accountService: AccountService,
-    private alertService: AlertService
+    private alertService: AlertService,
+    private datePipe: DatePipe
   ) {
      this.accountService.user.subscribe(x => this.user = x);
     // this.user = this.accountService.user;
@@ -37,11 +41,10 @@ export class UpdateInformationUserComponent implements OnInit {
   ngOnInit() {
 
     this.form = this.formBuilder.group({
-    
       id: [this.user.id, Validators.required],
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
-      phone: ['', Validators.required],
+      phone: ['', [Validators.required, Validators.maxLength(10), Validators.minLength(10), Validators.pattern('[0-9]{10}')]],
       birthday: ['', Validators.required],
       sex: ['', Validators.required],
       username: ['', Validators.required],
@@ -49,7 +52,9 @@ export class UpdateInformationUserComponent implements OnInit {
 
     });
     this.accountService.user
-      .subscribe(x => this.form.patchValue(x));
+      .subscribe(x => {
+            this.form.patchValue(x);
+      });
     // this.user = this.accountService.user;
 
   }

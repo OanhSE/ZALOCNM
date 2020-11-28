@@ -29,15 +29,14 @@ export class LoginComponent implements OnInit {
         });
     }
 
-    
-    // convenience getter for easy access to form fields
+// convenience getter for easy access to form fields
   // tslint:disable-next-line:typedef
     get f() { return this.form.controls; }
 
   // tslint:disable-next-line:typedef
 
-  // tslint:disable-next-line:typedef
 
+  // tslint:disable-next-line:typedef
     onSubmit() {
 
 

@@ -18,7 +18,7 @@
 
   <div class="form-group">
     <label>Ngày sinh:</label>
-    <input type="date" formControlName="birthday" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.birthday.errors }" />
+    <input type="date" formControlName="birthday"  class="form-control" [ngClass]="{ 'is-invalid': submitted && f.birthday.errors }" />
     <div *ngIf="submitted && f.birthday.errors" class="invalid-feedback">
       <div *ngIf="f.birthday.errors.required"> Ngày sinh là bắt buộc</div>
     </div>

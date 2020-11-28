@@ -52,6 +52,7 @@ export class DirectoryComponent implements OnInit {
       .subscribe((data: User) => {
         /*this.category = data;*/
         this.u = data;
+        this.checkAddFriend(this.user.id, this.u.id);
         // console.log(data);
       });
 
@@ -109,7 +110,7 @@ export class DirectoryComponent implements OnInit {
         this.contactservice.checkRequestFriend(id1, id2).subscribe(x => {
           this.check = x;
         });
-        return this.check;
+
   }
 
 }

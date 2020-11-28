@@ -67,33 +67,30 @@
 
         <!-- Modal body -->
         <div class="modal-body">
-          <form class="form-inline" action="/action_page.php">
-            <input class="form-control mr-sm-1" type="text" name="phone"
-                   id="phone" placeholder="Số điện thoại" [(ngModel)]="phone" >
-            <button class="btn btn-success" type="submit" (click)="findByPhone()">Tìm kiếm</button>
-          </form>
-          <div *ngIf="u">
-          <div data-toggle="modal" data-target="#myModalInf">
-            <div class="find-friend-suggestion-item">
-              <img class="avatar-img" src="assets/images/listgroup.png" alt="logo">
-              <div class="truncate">
-                {{u.username}}
-              </div>
-              <div class="phone-user">
-                {{u.phone}}
-              </div>
-              <button *ngIf="checkAddFriend(user.id,u.id)" class="button-user-addfriend" (click)= "saveContact(user.id,u.id)">Kết bạn</button>
-              <button *ngIf="!checkAddFriend(user.id,u.id)" class="button-user-addfriend" >------</button>
+            <form class="form-inline" action="/action_page.php">
+              <input class="form-control mr-sm-1" type="text" name="phone"
+                     id="phone" placeholder="Số điện thoại" [(ngModel)]="phone"/>
+              <button class="btn btn-success" type="submit" (click)="findByPhone()">Tìm kiếm</button>
+            </form>
+            <div *ngIf="u">
+                <div data-toggle="modal" data-target="#myModalInf">
+                  <div class="find-friend-suggestion-item">
+                    <img class="avatar-img" src="assets/images/listgroup.png" alt="logo">
+                    <div class="truncate">
+                      {{u.username}}
+                    </div>
+                    <div class="phone-user">
+                      {{u.phone}}
+                    </div>
+<!--                    <button *ngIf="check==-1" class="button-user-addfriend" (click)= "saveContact(user.id,u.id)">Kết bạn</button>-->
+<!--                    <button *ngIf="check==0" class="button-user-addfriend" >Hủy kết bạn</button>-->
+<!--                    <button *ngIf="check==2" class="button-user-addfriend" (click)= "saveContact(user.id,u.id)">Chấp nhận</button>-->
+<!--                    <button *ngIf="check==1" class="button-user-addfriend" >Bạn bè</button>-->
+                  </div>
+                </div>
 
             </div>
-
-
-
-          </div>
-          </div>
-
         </div>
-
         <!-- Modal footer -->
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
@@ -119,23 +116,24 @@
         <div class="modal-body">
 
           <p align="center"><img src="assets/images/add-user.png" class="img-rounded"  width="50%" height="150"></p>
-          <div >
+
             <div class="row" >
               <div class="col-12" align="center">
                 <h2>{{u.username}}</h2>
               </div>
             </div>
             <div class="row" style="padding: 20px">
-              <div class="col-6" align="center">
-                <button type="button" class="btn btn-primary">Nhắn tin</button>
-              </div>
-              <div class="col-6" align="center">
-                <button *ngIf="checkAddFriend(user.id,u.id)===0" class="button-user-addfriend" (click)= "saveContact(user.id,u.id)">Kết bạn</button>
-                <button *ngIf="checkAddFriend(user.id,u.id)===1" class="button-user-addfriend" >Hủy kết bạn</button>
-                <button *ngIf="checkAddFriend(user.id,u.id)===2" class="button-user-addfriend" (click)= "saveContact(user.id,u.id)">Chấp nhận</button>
-                <button *ngIf="checkAddFriend(user.id,u.id)===3" class="button-user-addfriend" >Bạn bè</button>
+                  <div class="col-6" align="center">
+                    <button type="button" class="btn btn-primary">Nhắn tin</button>
+                  </div>
+                  <div class="col-6" align="center">
+                    <button *ngIf="check==-1" class="button-user-addfriend" (click)= "saveContact(user.id,u.id)">Kết bạn</button>
+                    <button *ngIf="check==0" class="button-user-addfriend" >Hủy kết bạn</button>
+                    <button *ngIf="check==2" class="button-user-addfriend" (click)= "saveContact(user.id,u.id)">Chấp nhận</button>
+                    <button *ngIf="check==1" class="button-user-addfriend" >Bạn bè</button>
 
-              </div>
+                  </div>
+            </div>
             <div class="row" >
               <div class="col-4">
                 <span> Nhóm chung</span>
@@ -160,6 +158,7 @@
                 <span>{{u.birthday}}</span>
               </div>
             </div>
+
 <!--            <div class="row">-->
 <!--              <div class="col-3">-->
 <!--                <button type="button" class="btn btn-outline-secondary">Chia sẻ</button>-->
@@ -175,7 +174,7 @@
 <!--              </div>-->
 
 <!--            </div>-->
-          </div>
+
         </div>
       </div>
     </div>
@@ -184,4 +183,5 @@
   <!--Kết thúc modal 2-->
 
 </div>
+
 
