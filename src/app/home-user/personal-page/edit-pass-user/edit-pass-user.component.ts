@@ -52,15 +52,15 @@ export class EditPassUserComponent implements OnInit {
   editPhone() {
 
     if (this.user.password === this.fake.old) {
-      if (this.fake.password === this.fake.confirmp && this.fake.password !== null) {
+      if ((this.fake.password === this.fake.confirmp) && (this.fake.password !== null)) {
         this.user.password = this.fake.password;
         this.userSubject = new BehaviorSubject<User>(this.user);
         this.accountService.update(this.userSubject.value)
           .pipe(first())
           .subscribe({
             next: () => {
-              this.alertService.success('Cập nhật thành công', { keepAfterRouteChange: true });
-              this.router.navigate(['../'], { relativeTo: this.route });
+              this.alertService.success('Cập nhật thành công', {keepAfterRouteChange: true});
+              this.router.navigate(['../'], {relativeTo: this.route});
             },
             error: error => {
               this.alertService.error(error);
@@ -68,11 +68,12 @@ export class EditPassUserComponent implements OnInit {
             }
           });
       } else {
-        this.alertService.error('xác thực mật khẩu không trùng khớp');
+
+        alert('xac thuc password khong trung khop');
       }
     } else {
-      this.alertService.error('xác thực mật khẩu không hợp lệ');
-    }
+      alert('password nhap vao khong hop le');
+}
   }
 
 

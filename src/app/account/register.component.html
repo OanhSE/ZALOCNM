@@ -21,6 +21,8 @@
             <input type="tel" formControlName="phone" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.phone.errors }" />
             <div *ngIf="submitted && f.phone.errors" class="invalid-feedback">
               <div *ngIf="f.phone.errors.required">Số điện thoại là bắt buộc</div>
+              <div *ngIf="f.phone.errors.minlength">Số điện thoại 10 kí tự</div>
+              <div *ngIf="f.phone.errors.maxlength">Số điện thoại 10 kí tự</div>
             </div>
           </div>
           <div class="form-group">
