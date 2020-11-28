@@ -52,7 +52,7 @@ export class EditPassUserComponent implements OnInit {
   editPhone() {
 
     if (this.user.password === this.fake.old) {
-      if (this.fake.password === this.fake.confirmp && this.fake.password !== null) {
+      if ((this.fake.password === this.fake.confirmp) && (this.fake.password !== null)) {
         this.user.password = this.fake.password;
         this.userSubject = new BehaviorSubject<User>(this.user);
         this.accountService.update(this.userSubject.value)
@@ -68,16 +68,13 @@ export class EditPassUserComponent implements OnInit {
             }
           });
       } else {
-        // tslint:disable-next-line:no-unused-expression
-        error => {
-          alert('xac thuc password khong trung khop');
-        };
+       
+        alert('xac thuc password khong trung khop');
+       
       }
     } else {
-      // tslint:disable-next-line:no-unused-expression
-      error => {
-        alert('password nhap vao khong hop le');
-      };
+      alert('password nhap vao khong hop le');
+      
     }
   }
 

@@ -22,12 +22,14 @@ export class LoginComponent implements OnInit {
 
   // tslint:disable-next-line:typedef
     ngOnInit() {
+
         this.form = this.formBuilder.group({
             phone: ['', Validators.required],
-            password: ['', Validators.required]
+            password: ['', Validators.required],
         });
     }
 
+    
     // convenience getter for easy access to form fields
   // tslint:disable-next-line:typedef
     get f() { return this.form.controls; }
@@ -35,7 +37,10 @@ export class LoginComponent implements OnInit {
   // tslint:disable-next-line:typedef
 
   // tslint:disable-next-line:typedef
+
     onSubmit() {
+
+
         this.submitted = true;
 
         // reset alerts on submit
@@ -45,7 +50,6 @@ export class LoginComponent implements OnInit {
         if (this.form.invalid) {
             return;
         }
-
         this.loading = true;
         this.accountService.login(this.f.phone.value, this.f.password.value)
             .pipe(first())

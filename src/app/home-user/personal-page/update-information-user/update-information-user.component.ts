@@ -37,11 +37,7 @@ export class UpdateInformationUserComponent implements OnInit {
   ngOnInit() {
 
     this.form = this.formBuilder.group({
-      // firstName: ['', Validators.required],
-      // lastName: ['', Validators.required],
-      // birthday: ['', Validators.required],
-      // sex: ['', Validators.required],
-      // username: ['', Validators.required],
+    
       id: [this.user.id, Validators.required],
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
