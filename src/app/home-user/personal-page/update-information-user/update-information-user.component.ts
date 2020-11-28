@@ -4,6 +4,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {AccountService, AlertService} from '@app/_services';
 import {first} from 'rxjs/operators';
+import {BehaviorSubject} from 'rxjs';
 
 @Component({
   selector: 'app-update-information-user',
@@ -18,7 +19,7 @@ export class UpdateInformationUserComponent implements OnInit {
   isAddMode: boolean;
   loading = false;
   submitted = false;
-
+  userSubject: BehaviorSubject<User>;
   constructor(
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
@@ -26,8 +27,9 @@ export class UpdateInformationUserComponent implements OnInit {
     private accountService: AccountService,
     private alertService: AlertService
   ) {
-    this.accountService.user.subscribe(x => this.user = x);
-    this.id = this.user.id;
+     this.accountService.user.subscribe(x => this.user = x);
+    // this.user = this.accountService.user;
+     this.id = this.user.id;
 
   }
 
@@ -40,6 +42,7 @@ export class UpdateInformationUserComponent implements OnInit {
       // birthday: ['', Validators.required],
       // sex: ['', Validators.required],
       // username: ['', Validators.required],
+      id: [this.user.id, Validators.required],
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       phone: ['', Validators.required],
@@ -51,6 +54,7 @@ export class UpdateInformationUserComponent implements OnInit {
     });
     this.accountService.user
       .subscribe(x => this.form.patchValue(x));
+    // this.user = this.accountService.user;
 
   }
 
@@ -77,7 +81,8 @@ export class UpdateInformationUserComponent implements OnInit {
   }
   // tslint:disable-next-line:typedef
   private updateUser(){
-    this.accountService.update( this.id, this.form.value)
+    this.userSubject = new BehaviorSubject<User>(this.form.value);
+    this.accountService.update(this.userSubject.value)
       .pipe(first())
       .subscribe({
         next: () => {

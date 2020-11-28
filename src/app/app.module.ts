@@ -11,6 +11,7 @@ import { JwtInterceptor, ErrorInterceptor } from './_helpers';
 import { AppComponent } from './app.component';
 import { AlertComponent } from './_components';
 import {HomeUserModule} from '@app/home-user/home-user.module';
+import { FilterPipe } from './filter.pipe';
 
 
 
@@ -30,6 +31,8 @@ import {HomeUserModule} from '@app/home-user/home-user.module';
     declarations: [
         AppComponent,
         AlertComponent
+,
+        FilterPipe
 
 
         ],

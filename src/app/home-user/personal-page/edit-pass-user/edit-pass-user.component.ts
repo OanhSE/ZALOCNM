@@ -3,6 +3,8 @@ import {User} from '@app/_models';
 import {ActivatedRoute, Router} from '@angular/router';
 import {AccountService, AlertService} from '@app/_services';
 import {AppComponent} from '@app/app.component';
+import {BehaviorSubject} from 'rxjs';
+import {first} from 'rxjs/operators';
 
 @Component({
   selector: 'app-edit-pass-user',
@@ -17,7 +19,7 @@ export class EditPassUserComponent implements OnInit {
   confirm = null;
   new = null;
   fake: User = new User();
-
+  userSubject: BehaviorSubject<User>;
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -52,14 +54,18 @@ export class EditPassUserComponent implements OnInit {
     if (this.user.password === this.fake.old) {
       if (this.fake.password === this.fake.confirmp && this.fake.password !== null) {
         this.user.password = this.fake.password;
-        this.accountService.update(this.user.id, this.user).subscribe(response => {
-            alert('success');
-            /*this.message = 'The tutorial was updated successfully!';*/
-            // this.router.navigate(['/']);
-          },
-          error => {
-            console.log(error);
-            alert('error');
+        this.userSubject = new BehaviorSubject<User>(this.user);
+        this.accountService.update(this.userSubject.value)
+          .pipe(first())
+          .subscribe({
+            next: () => {
+              this.alertService.success('Cập nhật thành công', { keepAfterRouteChange: true });
+              this.router.navigate(['../'], { relativeTo: this.route });
+            },
+            error: error => {
+              this.alertService.error(error);
+
+            }
           });
       } else {
         // tslint:disable-next-line:no-unused-expression

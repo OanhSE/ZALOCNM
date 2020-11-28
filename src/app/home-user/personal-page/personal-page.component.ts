@@ -13,6 +13,7 @@ export class PersonalPageComponent implements OnInit {
 
   constructor(private accountService: AccountService) {
     this.accountService.user.subscribe(x => this.user = x);
+    // this.user = this.accountService.user;
   }
 
   // tslint:disable-next-line:typedef

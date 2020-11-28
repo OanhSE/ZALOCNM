@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 
 import { AccountService, AlertService } from '@app/_services';
+import {Alert} from '../_models';
 
 @Component({ templateUrl: 'login.component.html' })
 export class LoginComponent implements OnInit {
@@ -51,6 +52,7 @@ export class LoginComponent implements OnInit {
             .subscribe({
                 next: () => {
                     // get return url from query parameters or default to home page
+                    this.alertService.success('Đăng nhập thành công', { keepAfterRouteChange: true });
                     const returnUrl = this.route.snapshot.queryParams.returnUrl || '/';
                     this.router.navigateByUrl(returnUrl);
                 },

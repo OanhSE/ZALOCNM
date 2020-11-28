@@ -6,6 +6,9 @@ import { delay, materialize, dematerialize } from 'rxjs/operators';
 // array in local storage for registered users
 const usersKey = 'angular-10-registration-login-example-users';
 let users = JSON.parse(localStorage.getItem(usersKey)) || [];
+const contactkey = 'ngular-10-registration-login-example-contacts';
+const contacts = JSON.parse(localStorage.getItem(contactkey)) || [];
+
 
 @Injectable()
 export class FakeBackendInterceptor implements HttpInterceptor {
@@ -25,10 +28,18 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                     return getUsers();
                 case url.match(/\/users\/\d+$/) && method === 'GET':
                     return getUserById();
+                case url.match(/\/up\/\d+$/) && method === 'GET':
+                    return getUserByPhone();
                 case url.match(/\/users\/\d+$/) && method === 'PUT':
                     return updateUser();
                 case url.match(/\/users\/\d+$/) && method === 'DELETE':
                     return deleteUser();
+                case url.endsWith('/contacts/addcontact') && method === 'POST':
+                    return addcontact();
+                case url.match(/\/contacts\/\d+$/) && method === 'GET':
+                    return  getContactsByContactIdUser();
+                // case url.match(/\/contacts\/\d+$/) && method === 'GET':
+                //     return getContactById();
                 default:
                     // pass through any requests not handled above
                     return next.handle(request);
@@ -71,10 +82,21 @@ export class FakeBackendInterceptor implements HttpInterceptor {
       // tslint:disable-next-line:typedef
         function getUserById() {
             if (!isLoggedIn()) { return unauthorized(); }
-
             const user = users.find(x => x.id === idFromUrl());
             return ok(basicDetails(user));
         }
+
+      // tslint:disable-next-line:typedef
+        function getUserByPhone() {
+          if (!isLoggedIn()) { return unauthorized(); }
+          const user = users.find(x => x.phone === idFromUrl2());
+          console.log(idFromUrl2());
+          if (user) {
+            return ok(basicDetails(user));
+          }
+          return error('Số điện thoại chưa tồn tại');
+
+      }
 
       // tslint:disable-next-line:typedef
         function updateUser() {
@@ -141,6 +163,42 @@ export class FakeBackendInterceptor implements HttpInterceptor {
           // tslint:disable-next-line:radix
             return parseInt(urlParts[urlParts.length - 1]);
         }
+      // tslint:disable-next-line:typedef
+        function idFromUrl2() {
+        const urlParts = url.split('/');
+        // tslint:disable-next-line:radix
+        return urlParts[urlParts.length - 1];
+       }
+      // tslint:disable-next-line:typedef
+        function addcontact() {
+        const contact = body;
+
+        if (contacts.find(x => x.iduser === contact.iduser && x.iduserdirectory === contact.iduserdirectory)) {
+          return error('đã thêm bạn bè');
+        }
+
+        contact.id = contacts.length ? Math.max(...contacts.map(x => x.id)) + 1 : 1;
+        contacts.push(contact);
+        localStorage.setItem(contactkey, JSON.stringify(contacts));
+        console.log('đang add');
+        return ok();
+      }
+      // tslint:disable-next-line:typedef
+        function getContactsByContactIdUser() {
+
+        const listcontact = contacts.find(x => x.iduser === idFromUrl());
+
+
+        if (!isLoggedIn()) { return error('không có danh sách'); }
+        return ok(listcontact.map(x => basicDetails(x)));
+      }
+      // tslint:disable-next-line:typedef
+        function getContactById() {
+        if (!isLoggedIn()) { return unauthorized(); }
+
+        const contact = contacts.find(x => x.id === idFromUrl());
+        return ok(basicDetails(contact));
+      }
     }
 }
 

@@ -4,6 +4,8 @@ import {User} from '@app/_models';
 import {ActivatedRoute, Router} from '@angular/router';
 import {AccountService, AlertService} from '@app/_services';
 import {AppComponent} from '@app/app.component';
+import {BehaviorSubject} from 'rxjs';
+import {first} from 'rxjs/operators';
 
 @Component({
   selector: 'app-edit-phone-user',
@@ -18,7 +20,7 @@ export class EditPhoneUserComponent implements OnInit {
   loading: boolean;
   submitted: boolean;
   user: User = new User();
-
+  userSubject: BehaviorSubject<User>;
   constructor(
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
@@ -69,16 +71,20 @@ export class EditPhoneUserComponent implements OnInit {
   // tslint:disable-next-line:typedef
   editPhone() {
     this.submitted = true;
-    this.accountService.update(this.user.id, this.user)
-      .subscribe(response => {
-          alert('success');
-          /*this.message = 'The tutorial was updated successfully!';*/
-          // this.router.navigate(['/']);
+   // this.userSubject = new BehaviorSubject<User>(this.user);
+    console.log(this.user.username);
+    this.accountService.update(this.user)
+      .pipe(first())
+      .subscribe({
+        next: () => {
+          this.alertService.success('Cập nhật thành công', { keepAfterRouteChange: true });
+          this.router.navigate(['../'], { relativeTo: this.route });
         },
-        error => {
-          console.log(error);
-          alert('error');
-        });
+        error: error => {
+          this.alertService.error(error);
+          this.loading = false;
+        }
+      });
   }
 
 

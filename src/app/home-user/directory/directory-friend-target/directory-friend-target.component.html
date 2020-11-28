@@ -1,0 +1,35 @@
+<div style="background-color: darkgray">
+<div class="fr-center-top" >
+  <div class="img-add-friend">
+    <img src="assets/images/add-user.png" alt="logo">
+  </div>
+  <div class="div-list-friend">
+    DANH SÁCH KẾT BẠN
+  </div>
+</div>
+
+  <div  class="scroll-directory" >
+    <div *ngFor="let userrequest of usersrequest " style="margin: 20px">
+      <div class="row item-content">
+
+          <div class="avatar-img col-3">
+            <img src="assets/images/add-user.png">
+          </div>
+          <div class=" col-4">
+              <span class="truncate">{{userrequest.username}}</span><br>
+              <span class="fr-phone">{{userrequest.phone}}</span>
+
+          </div>
+          <div class="col-5">
+
+                <button class="btn btn btn-link" style="margin: 20px 10px">Bỏ qua</button>
+
+                <button class="btn btn-primary" style="margin: 20px 10px" (click)="saveContact(user.id,userrequest.id)"> Đồng ý</button>
+
+          </div>
+
+      </div>
+
+    </div>
+  </div>
+</div>

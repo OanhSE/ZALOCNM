@@ -16,7 +16,8 @@ export class DeleteUserComponent implements OnInit {
   constructor(
     private router: Router,
     private accountService: AccountService) {
-    this.accountService.user.subscribe(x => this.user = x);
+     this.accountService.user.subscribe(x => this.user = x);
+    // this.user = this.accountService.user;
   }
 
   ngOnInit(): void {
