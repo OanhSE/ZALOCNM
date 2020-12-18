@@ -32,9 +32,15 @@
 
             <div class="row contact-list-item">
               <a routerLink="directory-chat/{{user.id}}">
-                <img class="fr-conv-item-avatar" src="assets/images/listgroup.png" alt="logo">
-                <span class="fr-conv-item-title truncate">{{user.username}}</span>
-                <span >{{user.phone}}</span>
+                <div style="float: left;"> 
+                  <img class="fr-conv-item-avatar" src="assets/images/listgroup.png" alt="logo">
+                </div>
+                <div style="float: right;">
+                  <span class="fr-conv-item-title truncate">{{user.username}}</span>
+                  <span style="color:rgb(87, 87, 204);font-size: 14px; font-family: 'Times New Roman', Times, serif;">  ( {{user.phone}} )</span>
+                </div>
+               
+                
               </a>
             </div>
           </div>

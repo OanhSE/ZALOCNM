@@ -54,11 +54,26 @@ export class RegisterComponent implements OnInit {
             .pipe(first())
             .subscribe({
                 next: () => {
-                    this.alertService.success('Đăng kí thành công', { keepAfterRouteChange: true });
-                    this.router.navigate(['../đăng nhập'], { relativeTo: this.route });
+                    this.alertService.success('Đăng kí thành công', { keepAfterRouteChange: false });
+                   // this.router.navigate(['../đăng nhập'], { relativeTo: this.route });
+
+                   this.accountService.login(this.f.phone.value, this.f.password.value)
+                    .pipe(first())
+                    .subscribe({
+                    next: () => {
+                    // get return url from query parameters or default to home page
+                    this.alertService.success('Đăng nhập thành công', { keepAfterRouteChange: false });
+                    const returnUrl = this.route.snapshot.queryParams.returnUrl || '/';
+                    this.router.navigateByUrl(returnUrl);
                 },
                 error: error => {
-                    this.alertService.error(error);
+                    this.alertService.error('Đăng nhập thất bại');
+                    this.loading = false;
+                }
+            });
+                },
+                error: error => {
+                    this.alertService.error('Đăng ký thất bại');
                     this.loading = false;
                 }
             });

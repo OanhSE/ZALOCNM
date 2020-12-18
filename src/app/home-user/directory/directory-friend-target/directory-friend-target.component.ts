@@ -42,15 +42,35 @@ constructor(
       .pipe(first())
       .subscribe({
         next: () => {
-          this.alertService.success('Thêm danh bạ thành công', { keepAfterRouteChange: true });
-          this.router.navigate(['../directory'], { relativeTo: this.route });
+          this.alertService.success('Thêm danh bạ thành công', { keepAfterRouteChange: true});
+          this.router.navigate(['../../directory'], { relativeTo: this.route });
         },
         error: error => {
-          this.alertService.error(error);
-
+          console.log(error);
+          this.alertService.error('Thêm thất bại');
+          
         }
       });
   }
+
+  deleteContact(contact: Contact ){
+    this.contactservice.deleteContact(contact)
+      .pipe(first())
+      .subscribe({
+        next: () => {
+          this.alertService.success('Bỏ qua thành công', { keepAfterRouteChange: true});
+          this.getListContactFriendByUser(this.user.id);
+        },
+        error: error => {
+          console.log(error);
+          this.alertService.error('Bỏ qua không thành công');
+          
+          
+        }
+      });
+  }
+
+ 
   // tslint:disable-next-line:typedef
   getListContactFriendByUser(id: string){
     this.contactservice.getListContactFriendByUser(id).subscribe((data) => {

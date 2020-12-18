@@ -96,11 +96,11 @@ export class DirectoryComponent implements OnInit {
       .pipe(first())
       .subscribe({
         next: () => {
-          this.alertService.success('Thêm danh bạ thành công', { keepAfterRouteChange: true });
+          this.alertService.success('Yêu cầu kết bạn thành công', { keepAfterRouteChange: true });
           this.router.navigate(['../directory'], { relativeTo: this.route });
         },
         error: error => {
-          this.alertService.error(error);
+          this.alertService.error('Yêu cầu thất bại');
 
         }
       });
