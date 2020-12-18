@@ -12,7 +12,7 @@ export class AccountService {
   private userSubject: BehaviorSubject<User>;
   public user: Observable<User>;
   public uservalue: User ;
-  public url = 'http://module120.ap-southeast-1.elasticbeanstalk.com/';
+  public url = '';
 
   constructor(
     private router: Router,
