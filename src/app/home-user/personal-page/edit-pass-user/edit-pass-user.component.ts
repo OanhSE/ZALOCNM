@@ -5,6 +5,7 @@ import {AccountService, AlertService} from '@app/_services';
 import {AppComponent} from '@app/app.component';
 import {BehaviorSubject} from 'rxjs';
 import {first} from 'rxjs/operators';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-edit-pass-user',
@@ -18,6 +19,12 @@ export class EditPassUserComponent implements OnInit {
   old = null;
   confirm = null;
   new = null;
+  form: FormGroup;
+
+  // oldPassword: new FormControl('', Validators.required),
+  // newPassword: new FormControl( '', [Validators.required, Validators.minLength(6)]),
+  // reNewPassword: new FormControl('', [Validators.required])
+
   fake: User = new User();
   userSubject: BehaviorSubject<User>;
   constructor(
@@ -25,17 +32,27 @@ export class EditPassUserComponent implements OnInit {
     private router: Router,
     private accountService: AccountService,
     private alertService: AlertService,
-    private u: AppComponent) {
+    private u: AppComponent,
+    private formBuilder: FormBuilder
+    ) {
 
   }
 
   ngOnInit(): void {
     this.user = this.u.getUser();
+    console.log(this.user.password);
 
-    // this.fake = this.u.getUser();
-    console.log(this.user.id);
-    this.getUser(this.user.id);
-    this.pwd = this.user.password;
+    // // this.fake = this.u.getUser();
+    // console.log(this.user.id);
+    // this.getUser(this.user.id);
+    // this.pwd = this.user.password;
+
+    this.form = this.formBuilder.group({
+      oldPassword: ['', Validators.required],
+      newPassword: ['', [Validators.required, Validators.minLength(6)]],
+      reNewPassword: ['', [Validators.required]]
+  });
+
   }
 
   // tslint:disable-next-line:typedef
@@ -50,10 +67,34 @@ export class EditPassUserComponent implements OnInit {
 
   // tslint:disable-next-line:typedef
   editPhone() {
+    const oldPassword = this.form.get('oldPassword').value;
+    const newPassword = this.form.get('newPassword').value;
+    console.log(this.form);
+    const reNewPassword = this.form.get('reNewPassword').value;
+    this.alertService.clear();
 
-    if (this.user.password === this.fake.old) {
-      if ((this.fake.password === this.fake.confirmp) && (this.fake.password !== null)) {
-        this.user.password = this.fake.password;
+    if (this.form.invalid){
+      // console.log("invalid")
+      if (oldPassword === ''){
+        this.alertService.error('Vui lòng nhập password cũ.');
+      }
+      if (newPassword === ''){
+        this.alertService.error('Vui lòng nhập password mới.');
+      }
+      if (newPassword.length < 6){
+        this.alertService.error('Vui lòng nhập password mới dài hơn 6 kí tự.');
+      }
+      return;
+    }
+    console.log(this.form.get('newPassword'));
+     // stop here if form is invalid
+    console.log(this.form.errors);
+    // console.log(this.form.get('newPassword').)
+
+
+    if (this.user.password === oldPassword) {
+      if ((newPassword === reNewPassword) && (newPassword !== null)) {
+        this.user.password = newPassword;
         this.userSubject = new BehaviorSubject<User>(this.user);
         this.accountService.update(this.userSubject.value)
           .pipe(first())
@@ -64,15 +105,16 @@ export class EditPassUserComponent implements OnInit {
             },
             error: error => {
               this.alertService.error(error);
-
             }
           });
+
+        this.form.reset();
       } else {
 
-        alert('xac thuc password khong trung khop');
+        alert('Xác thực mật khẩu không khớp.');
       }
     } else {
-      alert('password nhap vao khong hop le');
+      alert('Vui lòng nhập đúng password cũ.');
 }
   }
 

@@ -5,14 +5,17 @@ import { first } from 'rxjs/operators';
 
 import { AccountService, AlertService } from '@app/_services';
 import validate = WebAssembly.validate;
+import { DatePipe } from '@angular/common';
 
-@Component({ templateUrl: 'register.component.html' })
+@Component({ templateUrl: './register.component.html' })
 export class RegisterComponent implements OnInit {
     form: FormGroup;
     loading = false;
     submitted = false;
-
-    constructor(
+    dateCurrent = new Date();
+    date = false;
+    isShowErrorDate = false;
+     constructor(
         private formBuilder: FormBuilder,
         private route: ActivatedRoute,
         private router: Router,
@@ -36,6 +39,32 @@ export class RegisterComponent implements OnInit {
     // convenience getter for easy access to form fields
   // tslint:disable-next-line:typedef
     get f() { return this.form.controls; }
+    checkDate(){
+
+        let birthday = new Date(this.form.get('birthday').value);
+        console.log(birthday);
+
+        var now = new Date();
+        var current_year = now.getFullYear();
+        var year_diff = current_year - birthday.getFullYear();
+        var birthday_this_year = new Date(current_year, birthday.getMonth(), birthday.getDate());
+        var has_had_birthday_this_year = (now >= birthday_this_year);
+
+        let age = has_had_birthday_this_year
+            ? year_diff
+            : year_diff - 1;
+
+        if (age < 18){
+            this.isShowErrorDate = true;
+        }
+        else{
+            this.isShowErrorDate = false;
+        }
+
+        console.log(age);
+        console.log(this.isShowErrorDate);
+         
+    }
 
   // tslint:disable-next-line:typedef
     onSubmit() {
@@ -54,26 +83,29 @@ export class RegisterComponent implements OnInit {
             .pipe(first())
             .subscribe({
                 next: () => {
-                    this.alertService.success('Đăng kí thành công', { keepAfterRouteChange: false });
-                   // this.router.navigate(['../đăng nhập'], { relativeTo: this.route });
+                    this.alertService.success('Đăng kí thành công', { keepAfterRouteChange: true });
+                    // this.router.navigate(['/']);
+                    let phone = this.form.get('phone').value;
+                    let password = this.form.get('password').value;
 
-                   this.accountService.login(this.f.phone.value, this.f.password.value)
-                    .pipe(first())
-                    .subscribe({
-                    next: () => {
-                    // get return url from query parameters or default to home page
-                    this.alertService.success('Đăng nhập thành công', { keepAfterRouteChange: false });
-                    const returnUrl = this.route.snapshot.queryParams.returnUrl || '/';
-                    this.router.navigateByUrl(returnUrl);
+                    // this.accountService.login(this.form.get('phone').value, this.form.get('password').value);
+                    this.accountService.login(phone, password)
+                        .pipe(first())
+                        .subscribe({
+                            next: () => {
+                                // get return url from query parameters or default to home page
+                                this.alertService.success('Đăng nhập thành công', { keepAfterRouteChange: true });
+                                const returnUrl = this.route.snapshot.queryParams.returnUrl || '/';
+                                this.router.navigateByUrl(returnUrl);
+                            },
+                            error: error => {
+                                this.alertService.error(error);
+                                this.loading = false;
+                            }
+                        });
                 },
                 error: error => {
-                    this.alertService.error('Đăng nhập thất bại');
-                    this.loading = false;
-                }
-            });
-                },
-                error: error => {
-                    this.alertService.error('Đăng ký thất bại');
+                    this.alertService.error(error);
                     this.loading = false;
                 }
             });

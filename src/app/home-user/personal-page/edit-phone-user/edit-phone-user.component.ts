@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup} from '@angular/forms';
+// import {FormBuilder, FormGroup} from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {User} from '@app/_models';
 import {ActivatedRoute, Router} from '@angular/router';
 import {AccountService, AlertService} from '@app/_services';
@@ -34,11 +35,9 @@ export class EditPhoneUserComponent implements OnInit {
 
   // tslint:disable-next-line:typedef
   ngOnInit() {
-    /*this.form = this.formBuilder.group({
-      id: [''],
-      oldPhone: ['', Validators.required],
-      newPhone: ['', Validators.required]
-    });*/
+    this.form = this.formBuilder.group({
+      phone: ['', [Validators.required, Validators.pattern('[0-9]{10}')]]
+    });
     this.submitted = false;
     this.loading = false;
     // this.id = this.route.snapshot.paramMap.get('id');
@@ -52,6 +51,9 @@ export class EditPhoneUserComponent implements OnInit {
 
   }
 
+
+  // tslint:disable-next-line:typedef
+  get f() { return this.form.controls; }
   // tslint:disable-next-line:typedef
   getUser(id) {
     this.accountService.getById(id)
@@ -70,9 +72,17 @@ export class EditPhoneUserComponent implements OnInit {
 
   // tslint:disable-next-line:typedef
   editPhone() {
+    if (this.form.invalid) {
+      // console.log(this.form.errors);
+      // console.log(this.form.get('phone').hasError('minLength'));
+      // console.log(this.form.get('phone').hasError('maxLength'));
+      // console.log(this.form.get('phone').hasError('pattern'));
+      // console.log(this.form.get('phone'));
+      return;
+    }
     this.submitted = true;
-   // this.userSubject = new BehaviorSubject<User>(this.user);
-    console.log(this.user.username);
+    // this.userSubject = new BehaviorSubject<User>(this.user);
+    //  console.log(this.user.username);
     this.accountService.update(this.user)
       .pipe(first())
       .subscribe({
@@ -85,6 +95,7 @@ export class EditPhoneUserComponent implements OnInit {
           this.loading = false;
         }
       });
+
   }
 
 

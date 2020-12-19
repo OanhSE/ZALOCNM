@@ -12,12 +12,14 @@ import {DatePipe, formatDate} from '@angular/common';
 @Component({
   selector: 'app-update-information-user',
   templateUrl: './update-information-user.component.html',
-  styleUrls: ['./update-information-user.component.less']
+  styleUrls: ['./update-information-user.component.less'],
+  providers:[DatePipe]
 })
 export class UpdateInformationUserComponent implements OnInit {
   date: Date;
   user: User;
   form: FormGroup;
+  sex: string;
   id: string;
   isAddMode: boolean;
   loading = false;
@@ -39,6 +41,7 @@ export class UpdateInformationUserComponent implements OnInit {
 
   // tslint:disable-next-line:typedef
   ngOnInit() {
+    console.log("inside update info");
 
     this.form = this.formBuilder.group({
       id: [this.user.id, Validators.required],
@@ -57,6 +60,15 @@ export class UpdateInformationUserComponent implements OnInit {
       });
     // this.user = this.accountService.user;
 
+
+    
+    // console.log()
+    // let date = this.form.get('sex').value;
+    let date = this.form.get('birthday').value;
+    this.form.controls.birthday.setValue(this.datePipe.transform(date ,'yyyy-MM-dd','en'));
+
+    this.sex = this.form.get('sex').value;
+    console.log(this.form.get('sex').value)
   }
 
   // convenience getter for easy access to form fields
@@ -78,6 +90,7 @@ export class UpdateInformationUserComponent implements OnInit {
     this.loading = true;
 
     this.updateUser();
+    this.Huy();
 
   }
   // tslint:disable-next-line:typedef
@@ -95,6 +108,12 @@ export class UpdateInformationUserComponent implements OnInit {
           this.loading = false;
         }
       });
+  }
+
+  private Huy(){
+    
+    this.router.navigate(['../'], { relativeTo: this.route });
+       
   }
 
 

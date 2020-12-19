@@ -1,5 +1,5 @@
-<form >
 
+<form [formGroup]="form" (ngSubmit)="editPhone()">
   <div >
     <input type="text" [(ngModel)] ="user.firstName" name="first" class="form-control" style="display: none;"/>
   </div>
@@ -41,14 +41,20 @@
 
   </div>-->
 
-  <div >
+  <!--<div >
     <label>Số điện thoại mới:</label>
-    <input
-      [(ngModel)]="user.phone" name="phone"
-      id="phone"
-      type="tel"/>
+    <input  [(ngModel)]="user.phone" name="phone"  id="phone" type="tel"
+            formControlName="phone"
+    />
 
     <div class="invalid-feedback">Số điện thoại mới là bắt buộc</div>
+  </div>-->
+  <div class="form-group">
+    <label >Số điện thoại:</label>
+    <input [(ngModel)]="user.phone"  id="phone" type="tel" formControlName="phone" class=" " [ngClass]="{ 'is-invalid': this.form.get('phone').hasError('pattern')}" />
+    <div *ngIf="this.form.get('phone').hasError('pattern')" class="invalid-feedback">
+      <div *ngIf="this.form.get('phone').hasError('pattern')">Nhập số điện thoại gồm 10 chữ số.</div>
+    </div>
   </div>
 
 
@@ -56,10 +62,10 @@
 
     <div class=" col-xs-3">
       <!--      <button type="button" (click)="editPhone()" class="btn btn-danger">Hủy<i class="fa "></i></button>-->
-      <button type="submit" class="btn btn-success" (click)="editPhone()">Cập nhật<i class="fa"></i></button>
+      <button type="submit" class="btn btn-success" (click)="editPhone()" >Cập nhật<i class="fa"></i></button>
     </div>
 
   </div>
+  <!-- Modal -->
 
 </form>
-
