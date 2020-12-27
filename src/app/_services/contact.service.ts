@@ -12,7 +12,7 @@ export class ContactService {
   private contactSubject: BehaviorSubject<Contact>;
   public contact: Observable<Contact>;
   public contactvalue: Contact ;
-  public url = '';
+  public url = 'http://module120.ap-southeast-1.elasticbeanstalk.com/';
 
 
   constructor(
